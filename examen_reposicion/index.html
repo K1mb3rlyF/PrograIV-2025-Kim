@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Vehículo</title>
+  <style>
+    body {
+      background-color: #2E1A33;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: #572364;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(87, 35, 100, 0.5);
+      width: 420px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #F3E5F5;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #F3E5F5;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #7B4C94;
+      color: #FFFFFF;
+      font-size: 15px;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      outline: 2px solid #D1C4E9;
+      background-color: #6A3B85;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #D1C4E9;
+      border: none;
+      border-radius: 8px;
+      color: #572364;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #B39DDB;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Agregar Vehículo</h2>
+    <form id="vehiculoForm">
+      <label>Marca:</label>
+      <input type="text" id="marca" name="marca" required>
+
+      <label>Modelo:</label>
+      <input type="text" id="modelo" name="modelo" required>
+
+      <label>Año:</label>
+      <input type="number" id="year" name="year" required>
+
+      <label>Número de motor:</label>
+      <input type="text" id="num_motor" name="num_motor" required>
+
+      <label>Número de chasis:</label>
+      <input type="text" id="num_chasis" name="num_chasis" required>
+
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('vehiculoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let marca = document.getElementById('marca').value.trim();
+      let modelo = document.getElementById('modelo').value.trim();
+      let year = document.getElementById('year').value.trim();
+
+      const regexMarca = /^[A-Z]{3,}$/;
+      const regexModelo = /^[A-Za-z]{4,}$/;
+      const regexYear = /^[0-9]{4}$/;
+
+      if (!regexMarca.test(marca)) {
+        alert("⚠️ Marca inválida. Debe tener solo MAYÚSCULAS y mínimo 3 letras.");
+        return;
+      }
+
+      if (!regexModelo.test(modelo)) {
+        alert("⚠️ Modelo inválido. Debe tener mínimo 4 letras.");
+        return;
+      }
+
+      if (!regexYear.test(year)) {
+        alert("⚠️ Año inválido. Solo se permiten 4 dígitos numéricos.");
+        return;
+      }
+
+      alert("✅ ¡Formulario válido! Puedes continuar con el envío.");
+      // Aquí puedes llamar a tu función AJAX o continuar con el envío real
+    });
+  </script>
+</body>
+</html>
